@@ -36,8 +36,8 @@ namespace TestTaskForMindbox.FirstTask.Figures
 
         public bool ValidateOnIsRectangular()
         {
-            var hypotenuseLength = GetHypotenuseLength();
-            var cathetersLengths = GetCathetersLengths();
+            var hypotenuseLength = GetSidesLengths().Max();
+            var cathetersLengths = GetSidesLengths().Order().Take(2).ToArray();
 
             return cathetersLengths.Select(catheterLength => Math.Pow(catheterLength, 2)).Sum()
                 == Math.Pow(hypotenuseLength, 2);
@@ -46,16 +46,6 @@ namespace TestTaskForMindbox.FirstTask.Figures
         private double CalculateSemiperimeter()
         {
             return GetSidesLengths().Sum() / 2.0d;
-        }
-
-        private double GetHypotenuseLength()
-        {
-            return GetSidesLengths().Max();
-        }
-
-        private double[] GetCathetersLengths()
-        {
-            return GetSidesLengths().Order().Take(2).ToArray();
         }
 
         private double[] GetSidesLengths()
